@@ -1,5 +1,6 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Container, Row, Col, Button, Modal, Offcanvas } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 
 function DeviceCard(props) {
   const device = props.device;
@@ -22,10 +23,35 @@ function DeviceCard(props) {
 }
 
 export default function Home(props) {
+  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState(null);
+  const [data, setData] = useState(null);
+  const [page, setPage] = useState(1);
+
+  const filterData = (devices) => {
+    var items = devices.devices.slice((page * 100) - 100, page * 100);
+    setItems(items);
+  }
+
+  useEffect(() => {
+    const url = 'https://static.ui.com/fingerprint/ui/public.json';
+
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        setData(json)
+        filterData(json)
+        setLoading(false);
+      })
+  }, [])
+
+  if (loading) return <>Loading</>
 
   return (
     <>
-      {props.device.map(device => <DeviceCard device={device} key={device.id} />)}
+    <Row>
+      {items.map(device => <DeviceCard device={device} key={device.id} />)}
+      </Row>
     </>
   );
 }
@@ -44,7 +70,7 @@ export async function getServerSideProps(context) {
     } else lines[device.line.id].count++
   }
 
-  console.log(lines)
+  // console.log(lines)
 
   let page = 1
   var items = devices.slice((page * 100) - 100, page * 100);

@@ -1,3 +1,15 @@
+## TODO
+
+implement a search https://www.npmjs.com/package/fuzzysort
+
+implement filturing by product line
+
+move all data fetching and loading to client side. Remove all server side
+
+Clean up and make it look presentable
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
