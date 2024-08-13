@@ -8,6 +8,7 @@ move all data fetching and loading to client side. Remove all server side
 
 Clean up and make it look presentable
 
+make it sort by line by default
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
